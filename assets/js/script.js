@@ -40,7 +40,7 @@ function generatePlayingField(gridSize) {
         tileRow.classList.add('row');
         for (let y = 1; y <= gridSize; y++) {
             // generates id's in a coordinate system to allow checkBombPosition function to work
-            id = `${x},${y}`;
+            let id = `${x},${y}`;
             let tile = document.createElement('span');
             tile.setAttribute('id', id);
             tile.textContent = '';
@@ -65,7 +65,7 @@ function generatePlayingField(gridSize) {
 function generateBombs(gridSize) {
 
     let numberOfBombs = Math.floor(Math.random() * gridSize) + 3;
-    let bombPositions = []
+    let bombPositions = [];
     for (let i = 0; i< numberOfBombs;i++){
         //generate random coordinates
         let xCoord = Math.floor(Math.random() * gridSize) + 1;
@@ -81,8 +81,7 @@ function generateBombs(gridSize) {
             bomb.classList.add("bomb");
         }
     }
-    document.getElementById("bombs").innerHTML = "Number of bombs: ";
-    document.getElementById("bombs").innerHTML += numberOfBombs;
+    document.getElementById("bombs").innerHTML = `Number of bombs: ${numberOfBombs}`;
     console.log(bombPositions);
     return bombPositions;
 }
@@ -122,7 +121,7 @@ function checkBombPosition(tile){
     let numberOfBombs = document.getElementById("bombs").textContent[17];
     for(let i = 0; i <numberOfBombs; i++){
         if(tile.classList.contains('bomb')){
-            bombTiles = document.getElementsByClassName('bomb');
+            let bombTiles = document.getElementsByClassName('bomb');
             bombTiles[i].innerHTML = `<i class="fa-solid fa-bomb"></i>`;
             bombTiles[i].style.color = "black";
             document.getElementById('bombs').innerHTML = "BOOM! You found a bomb! GAME OVER!!";
