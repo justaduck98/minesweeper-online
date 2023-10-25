@@ -1,3 +1,10 @@
+body{
+    background: rgb(46, 46, 46);
+}
+
+main{
+    margin-top: 220px;
+}
 
 h1{
     text-align: center;
@@ -10,4 +17,24 @@ h1{
     top: 0;
     left: 0;
     width: 100%;
+}
+
+h2 {
+    color: white;
+    text-align: center;
+}
+
+.difficulty{
+    font-size: 40px;
+    color: white;
+    background-color: #fa5;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+#gameArea {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
