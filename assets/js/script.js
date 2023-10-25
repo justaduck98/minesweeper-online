@@ -47,7 +47,7 @@ function generatePlayingField(gridSize) {
         for (let y = 1; y <= gridSize; y++) {
             // generates id's in a coordinate system to allow checkBombFunction
             id = `${x},${y}`;
-            let tile = document.createElement('p');
+            let tile = document.createElement('span');
             tile.setAttribute('id', id);
             tile.textContent = '';
             tile.addEventListener('click', clickTile); 
@@ -75,16 +75,24 @@ function runGame(difficulty) {
 }
 
 /**A handler for clicking on a tile on the website */
-function clickTile() {
+function clickTile(event) {
+    let tile = event.target;
     if(flagToggled == true){
         console.log("flagToggled was true");
-        setFlag();
+        setFlag(tile);
     }
-
-    console.log(`The tile clicked was: ${this}`);
+    //adding .id after tile shows the id of the paragraph clicked, instead of outputting "HTMLParagraphElement"
+    console.log(`The tile clicked was: ${tile.id}`);
 }
 
-function setFlag(){
-    let tile = this;
-    tile.id.innerHTML = `<i class="fa-solid fa-flag"></i>`;
+function setFlag(tile){
+    if(tile.innerHTML.includes('fa-flag')){
+        tile.innerHTML= '';
+    }
+    else{
+        tile.innerHTML = `<i class="fa-solid fa-flag"id="flag"></i>`;
+    }
+
+    
+    
 }
