@@ -24,34 +24,38 @@ function generateBombs(gridSize){
 }
 
 function generatePlayingField(gridSize){
-    let playingField;
-        playingField = `
-        <table>
-            <tbody>`
-    for(let x = 0; x <gridSize; x++){
-        playingField += `
-        <tr id= "${x}">`;
-        for (let y= 0; y < gridSize; y++){
+    let playingField = document.createElement('div');
+    for(let x = 1; x <=gridSize; x++){
+        //Creates a row container for the following 5 elements
+        let tileRow = document.createElement('div');
+        tileRow.classList.add('row');
+        for (let y= 1; y <= gridSize; y++){
             // generates id's in a coordinate system to allow checkBombFunction
-            id= `${x}` + "," + `${y}`;
-            playingField += `
-            <td  id="${id}">X</td>
-            `;
+            id= `${x},${y}`;
+            let tile = document.createElement('p');
+            tile.setAttribute('id', id);
+            tile.textContent = 'X';
+            tile.addEventListener('click', clickTile);
+            tileRow.appendChild(tile);
             console.log(id);
         }
-        playingField += `
-        </tr>
-        `;
+        playingField.appendChild(tileRow);
     }
-    playingField += `
-        </tbody>
-    </table>`;
-    return playingField;
+    //removes old playing field if there is one
+    /*let oldField = document.getElementById('gameArea');
+    if(oldField){
+        document.getElementById('gameArea').removeChild(playingField);
+    }*/
+    //adds playing field to gameArea div
+    document.getElementById('gameArea').appendChild(playingField);
 }
 
 function runGame(difficulty){
     generateBombs(difficulty);
     let game = generatePlayingField(difficulty);
-    document.getElementsByTagName("span")[0].innerHTML = game;
     console.log(game);
+}
+
+function clickTile(event){
+    console.log('I was clicked');
 }
