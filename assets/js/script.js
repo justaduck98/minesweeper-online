@@ -121,8 +121,10 @@ function setFlag(tile){
 function checkBombPosition(tile){
     let numberOfBombs = document.getElementById("bombs").textContent[17];
     for(let i = 0; i <numberOfBombs; i++){
-        console.log(tile.id);
         if(tile.classList.contains('bomb')){
+            bombTiles = document.getElementsByClassName('bomb');
+            bombTiles[i].innerHTML = `<i class="fa-solid fa-bomb"></i>`;
+            bombTiles[i].style.color = "black";
             document.getElementById('bombs').innerHTML = "BOOM! You found a bomb! GAME OVER!!";
             document.getElementsByTagName('h2')[1].innerHTML = "Would You Like To Play Again?";
         }
