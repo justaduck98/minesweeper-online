@@ -38,3 +38,9 @@ h2 {
     justify-content: space-between;
     flex-direction: column;
 }
+
+#controlsArea{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: row;
+}
