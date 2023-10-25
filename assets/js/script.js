@@ -2,8 +2,11 @@
 window.onload = function () {
     runGame(5);
 };
+//counter to keep track if the user has beat the game
+let tilesFound = 0;
+let flagToggled = false;
 
-
+//event listener to the 3 difficulty buttons, running the same function but with different parameter!
 document.getElementById('option1').addEventListener("click", function () {
     /*Call run game function as well as generate bombs with parameter of number of squares and to generate*/
     runGame(5);
@@ -17,12 +20,24 @@ document.getElementById('option3').addEventListener("click", function () {
     runGame(9);
 });
 
+document.getElementById('flag').addEventListener('change', function(){
+    if(flag.checked){
+        flagToggled = true;
+    }
+    else {
+        flagToggled = false;
+    }
+});
+
+/**Generate bombs as a random number between gridsize and at least 1 */
 function generateBombs(gridSize) {
     let numberOfBombs = Math.floor(Math.random() * gridSize) + 1;
     document.getElementById("bombs").innerHTML = "Number of Bombs: " + numberOfBombs;
     console.log(numberOfBombs);
 }
-
+/**Generate div elements in a grid style using nested loops, and also assigning unique id's
+ * to be used as coordinates
+ */
 function generatePlayingField(gridSize) {
     let playingField = document.createElement('div');
     for (let x = 1; x <= gridSize; x++) {
@@ -34,8 +49,9 @@ function generatePlayingField(gridSize) {
             id = `${x},${y}`;
             let tile = document.createElement('p');
             tile.setAttribute('id', id);
-            tile.textContent = 'X';
-            tile.addEventListener('click', clickTile);
+            tile.textContent = '';
+            tile.addEventListener('click', clickTile); 
+            tile.addEventListener('right-click', clickTile);
             tileRow.appendChild(tile);
             console.log(id);
         }
@@ -51,13 +67,24 @@ function generatePlayingField(gridSize) {
 
 
 }
-
+/**A function to run all the necessary functions to play the game */
 function runGame(difficulty) {
     generateBombs(difficulty);
     let game = generatePlayingField(difficulty);
     console.log(game);
 }
 
-function clickTile(event) {
-    console.log('I was clicked');
+/**A handler for clicking on a tile on the website */
+function clickTile() {
+    if(flagToggled == true){
+        console.log("flagToggled was true");
+        setFlag();
+    }
+
+    console.log(`The tile clicked was: ${this}`);
+}
+
+function setFlag(){
+    let tile = this;
+    tile.id.innerHTML = `<i class="fa-solid fa-flag"></i>`;
 }
