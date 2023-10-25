@@ -29,12 +29,6 @@ document.getElementById('flag').addEventListener('change', function(){
     }
 });
 
-/**Generate bombs as a random number between gridsize and at least 1 */
-function generateBombs(gridSize) {
-    let numberOfBombs = Math.floor(Math.random() * gridSize) + 1;
-    document.getElementById("bombs").innerHTML = "Number of Bombs: " + numberOfBombs;
-    console.log(numberOfBombs);
-}
 /**Generate div elements in a grid style using nested loops, and also assigning unique id's
  * to be used as coordinates
  */
@@ -45,7 +39,7 @@ function generatePlayingField(gridSize) {
         let tileRow = document.createElement('div');
         tileRow.classList.add('row');
         for (let y = 1; y <= gridSize; y++) {
-            // generates id's in a coordinate system to allow checkBombFunction
+            // generates id's in a coordinate system to allow checkBombPosition function to work
             id = `${x},${y}`;
             let tile = document.createElement('span');
             tile.setAttribute('id', id);
@@ -67,10 +61,35 @@ function generatePlayingField(gridSize) {
 
 
 }
+/**Generate bombs as a random number between gridsize and at least 1 */
+function generateBombs(gridSize) {
+
+    let numberOfBombs = Math.floor(Math.random() * gridSize) + 3;
+    let bombPositions = []
+    for (let i = 0; i< numberOfBombs;i++){
+        //generate random coordinates
+        let xCoord = Math.floor(Math.random() * gridSize) + 1;
+        
+        let yCoord = Math.floor(Math.random() * gridSize) + 1;
+        //gets the tile.id to insert class="bomb"
+        let bomb = document.getElementById(`${xCoord},${yCoord}`);
+        //checks if tile.id already has class="bomb"
+        if(bomb.classList.contains(bomb)){
+            i--; //makes sure there's not too few bombs by making the loop run again
+        }
+        else{
+            bomb.classList.add("bomb");
+        }
+    }
+    document.getElementById("bombs").innerHTML = "Number of bombs: ";
+    document.getElementById("bombs").innerHTML += numberOfBombs;
+    console.log(bombPositions);
+    return bombPositions;
+}
 /**A function to run all the necessary functions to play the game */
 function runGame(difficulty) {
-    generateBombs(difficulty);
     let game = generatePlayingField(difficulty);
+    generateBombs(difficulty);
     console.log(game);
 }
 
@@ -81,10 +100,13 @@ function clickTile(event) {
         console.log("flagToggled was true");
         setFlag(tile);
     }
+    else{
+        checkBombPosition(tile);
+    }
     //adding .id after tile shows the id of the paragraph clicked, instead of outputting "HTMLParagraphElement"
     console.log(`The tile clicked was: ${tile.id}`);
 }
-
+/**Adds flag placement functionality */
 function setFlag(tile){
     if(tile.innerHTML.includes('fa-flag')){
         tile.innerHTML= '';
@@ -93,6 +115,17 @@ function setFlag(tile){
         tile.innerHTML = `<i class="fa-solid fa-flag"id="flag"></i>`;
     }
 
-    
+}
+
+/**Checks if tile clicked by user contains bomb */
+function checkBombPosition(tile){
+    let numberOfBombs = document.getElementById("bombs").textContent[17];
+    for(let i = 0; i <numberOfBombs; i++){
+        console.log(tile.id);
+        if(tile.classList.contains('bomb')){
+            document.getElementById('bombs').innerHTML = "BOOM! You found a bomb! GAME OVER!!";
+            document.getElementsByTagName('h2')[1].innerHTML = "Would You Like To Play Again?";
+        }
+    }
     
 }

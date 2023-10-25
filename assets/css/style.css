@@ -33,7 +33,6 @@ h2 {
 .fa-flag{
     height: 10px;
     width: 10px;
-    font-size: 15px;
     color: red;
 }
 
@@ -71,8 +70,8 @@ span{
     justify-content: center;
     color: #fa5;
     background-color: #fa5;
-    height: 50px;
-    width: 50px;
+    height: 25px;
+    width: 25px;
     margin: 5px;
 }
 
