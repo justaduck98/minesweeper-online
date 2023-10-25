@@ -4,7 +4,7 @@ body{
 }
 
 main{
-    margin-top: 220px;
+    margin-top: 200px;
 }
 
 h1{
@@ -54,9 +54,9 @@ h2 {
     justify-content: space-around;
 }
 p{
-    color: red;
-    background-color: red;
-    padding: 10px;
+    color: #fa5;
+    background-color: #fa5;
+    padding: 5px;
     margin: 5px;
 }
 
