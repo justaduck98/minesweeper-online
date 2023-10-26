@@ -3,20 +3,24 @@ window.onload = function () {
     runGame(5);
 };
 //counter to keep track if the user has beat the game
-let tilesFound = 0;
+let gameOn = true;
 let flagToggled = false;
+let gridSize = 0;
 
 //event listener to the 3 difficulty buttons, running the same function but with different parameter!
 document.getElementById('option1').addEventListener("click", function () {
     /*Call run game function as well as generate bombs with parameter of number of squares and to generate*/
+    gridSize = 5;
     runGame(5);
 });
 
 document.getElementById('option2').addEventListener("click", function () {
+    gridSize = 7;
     runGame(7);
 });
 
 document.getElementById('option3').addEventListener("click", function () {
+    gridSize = 9;
     runGame(9);
 });
 
@@ -87,6 +91,7 @@ function generateBombs(gridSize) {
 function runGame(difficulty) {
     let game = generatePlayingField(difficulty);
     generateBombs(difficulty);
+    tilesLeft = calculateWinCondition(difficulty);
     console.log(game);
 }
 
@@ -125,39 +130,30 @@ function checkBombPosition(tile) {
             document.getElementById('bombs').innerHTML = "BOOM! You found a bomb! GAME OVER!!";
             document.getElementsByTagName('h2')[1].innerHTML = "Would You Like To Play Again?";
         }
+        else if (gameOn == false) {
+            document.getElementsByTagName('h2')[1].innerHTML = "You won! Congratulations! Click one of the buttons if you would like to play more!";
+        }
         else {
             revealTile(tile);
         }
     }
 
 }
+
 /**This function will check nearby tiles for bombs and reveal them if there are no bombs */
 function revealTile(tile) {
 
     /**Prevents recursive calling when there is no tile with the called id */
     if (tile && tile.id) {
-        console.log("tile and tile.id exists");
         let coords = tile.id.split(',');
         let x = parseInt(coords[0]);
         let y = parseInt(coords[1]);
         let nearbyBombs = countBombs(tile);
-        tile.classList.add(`b${nearbyBombs}`);
+        tile.classList.add(`b${nearbyBombs}`, "revealed");
         tile.textContent = nearbyBombs;
         tile.style.backgroundColor = "lightgrey";
-        if (nearbyBombs === 0) {
-            console.log("Made it into if statement #2");
-            let newTiles = findAdjacentTiles(x, y);
-            for (let adjacent of newTiles) {
-                let adjacentTile = document.getElementById(`${adjacent.x},${adjacent.y}`);
-                revealTile(adjacentTile);
-            }
-        }
     }
-    else{
-        console.log("tile and tile.id didn't exist");
-        return;
-    }
-    
+
 }
 
 function countBombs(tile) {
@@ -189,4 +185,17 @@ function findAdjacentTiles(x, y) {
         [x, y - 1],
         [x + 1, y - 1],
     ];
+}
+
+function calculateWinCondition() {
+    let numberOfBombs = document.getElementsByClassName("bomb");
+    let tiles = document.getElementsByTagName("span");
+    let win = tiles.length-numberOfBombs.length;
+    let revealed = document.getElementsByClassName("revealed");
+    console.log("win length: "+ win);
+    console.log(revealed.length);
+    if(revealed.length == win){
+        let gameOn = false;
+    }   
+    return (win-revealed.length);
 }
