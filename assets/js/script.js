@@ -133,38 +133,60 @@ function checkBombPosition(tile) {
 }
 /**This function will check nearby tiles for bombs and reveal them if there are no bombs */
 function revealTile(tile) {
-    let nearbyBombs = countBombs(tile);
-    tile.classList.add(`b${nearbyBombs}`);
-    tile.textContent = nearbyBombs;
-    if (nearbyBombs === 0) {
-        document.getElementById
+
+    /**Prevents recursive calling when there is no tile with the called id */
+    if (tile && tile.id) {
+        console.log("tile and tile.id exists");
+        let coords = tile.id.split(',');
+        let x = parseInt(coords[0]);
+        let y = parseInt(coords[1]);
+        let nearbyBombs = countBombs(tile);
+        tile.classList.add(`b${nearbyBombs}`);
+        tile.textContent = nearbyBombs;
+        tile.style.backgroundColor = "lightgrey";
+        if (nearbyBombs === 0) {
+            console.log("Made it into if statement #2");
+            let newTiles = findAdjacentTiles(x, y);
+            for (let adjacent of newTiles) {
+                let adjacentTile = document.getElementById(`${adjacent.x},${adjacent.y}`);
+                revealTile(adjacentTile);
+            }
+        }
     }
-    tile.style.backgroundColor = "lightgrey";
+    else{
+        console.log("tile and tile.id didn't exist");
+        return;
+    }
+    
 }
 
-function countBombs(tile){
+function countBombs(tile) {
     let coords = tile.id;
     let x = parseInt(coords[0]);
     let y = parseInt(coords[2]);
     let bombCount = 0;
     // adds coordinates around the tile to check for bombs
-    let adjecentTiles =[
-        [x, y+1],
-        [x+1, y+1],
-        [x-1, y],
-        [x+1,y],
-        [x-1, y-1],
-        [x, y-1],
-        [x+1, y-1],
-    ];
+    let adjecentTiles = findAdjacentTiles(x, y);
     /**Loops through the nested array above of x and y coordinates adjacent to the clicked tile */
     for (let [adjecentX, adjecentY] of adjecentTiles) {
         let adjecentTile = document.getElementById(`${adjecentX},${adjecentY}`);
-        if(adjecentTile && adjecentTile.classList.contains('bomb')){
+        if (adjecentTile && adjecentTile.classList.contains('bomb')) {
             bombCount += 1;
-        }        
-        
+        }
+
     }
     return bombCount;
-    
+
+}
+/**returns an array of x and y coordinates that are in the closest proximity to the tile */
+function findAdjacentTiles(x, y) {
+    return [
+        [x, y + 1],
+        [x + 1, y + 1],
+        [x - 1, y],
+        [x + 1, y],
+        [x - 1, y - 1],
+        [x, y - 1],
+        [x + 1, y - 1],
+    ];
 }
