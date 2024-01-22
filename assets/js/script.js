@@ -144,7 +144,7 @@ function checkBombPosition(tile) {
 function revealTile(tile) {
 
     /**Prevents recursive calling when there is no tile with the called id */
-    if (tile && tile.id) {
+    if (tile && tile.id && !tile.classList.contains('revealed')) {
         let coords = tile.id.split(',');
         let x = parseInt(coords[0]);
         let y = parseInt(coords[1]);
@@ -152,6 +152,14 @@ function revealTile(tile) {
         tile.classList.add(`b${nearbyBombs}`, "revealed");
         tile.textContent = nearbyBombs;
         tile.style.backgroundColor = "lightgrey";
+
+        if (nearbyBombs === 0) {
+            let adjecentTiles = findAdjacentTiles(x, y);
+            for (let [adjecentX, adjecentY] of adjecentTiles) {
+                let adjecentTile = document.getElementById(`${adjecentX},${adjecentY}`);
+                revealTile(adjecentTile);
+            }
+        }
     }
 
 }
