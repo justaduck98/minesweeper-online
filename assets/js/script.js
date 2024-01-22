@@ -49,7 +49,7 @@ function generatePlayingField(gridSize) {
             tile.setAttribute('id', id);
             tile.textContent = '';
             tile.addEventListener('click', clickTile);
-            tile.addEventListener('right-click', clickTile);
+            tile.addEventListener('contextmenu', clickTile);
             tileRow.appendChild(tile);
             console.log(id);
         }
@@ -78,7 +78,7 @@ function generateBombs(gridSize) {
         //gets the tile.id to insert class="bomb"
         let bomb = document.getElementById(`${xCoord},${yCoord}`);
         //checks if tile.id already has class="bomb"
-        if (bomb.classList.contains(bomb)) {
+        if (bomb.classList.contains("bomb")) {
             i--; //makes sure there's no duplicate bombs by making the loop run again
         }
         else {
@@ -190,12 +190,12 @@ function findAdjacentTiles(x, y) {
 function calculateWinCondition() {
     let numberOfBombs = document.getElementsByClassName("bomb");
     let tiles = document.getElementsByTagName("span");
-    let win = tiles.length-numberOfBombs.length;
+    let win = tiles.length - numberOfBombs.length;
     let revealed = document.getElementsByClassName("revealed");
-    console.log("win length: "+ win);
+    console.log("win length: " + win);
     console.log(revealed.length);
-    if(revealed.length == win){
+    if (revealed.length == win) {
         let gameOn = false;
-    }   
-    return (win-revealed.length);
+    }
+    return (win - revealed.length);
 }
