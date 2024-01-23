@@ -50,7 +50,6 @@ function generatePlayingField(gridSize) {
             tile.addEventListener('click', clickTile);
             tile.addEventListener('contextmenu', clickTile);
             tileRow.appendChild(tile);
-            console.log(id);
         }
         playingField.appendChild(tileRow);
     }
@@ -98,15 +97,15 @@ function runGame(difficulty) {
 function clickTile(event) {
     let tile = event.target;
     if (flagToggled == true) {
-        console.log("flagToggled was true");
         setFlag(tile);
     }
     else {
-        checkBombPosition(tile);
-        calculateWinCondition();
+        //checks if the clicked tile has a flag, which prevents user from revealing the tile
+        if (!tile.classList.contains('flag')) {
+            checkBombPosition(tile);
+            calculateWinCondition();
+        }
     }
-    //adding .id after tile shows the id of the paragraph clicked, instead of outputting "HTMLParagraphElement"
-    console.log(`The tile clicked was: ${tile.id}`);
 }
 /**Adds flag placement functionality */
 function setFlag(tile) {
@@ -196,7 +195,6 @@ function calculateWinCondition() {
     let totalTiles = document.querySelectorAll("span:not(.bomb)");
     let revealedTiles = document.querySelectorAll('span.revealed:not(.bomb)');
     let tilesLeft = totalTiles - revealedTiles.length;
-    console.log(revealed.length);
     if (tilesLeft === 0) {
         document.getElementsByTagName('h2')[1].innerHTML = "You won! Congratulations! Click one of the buttons if you would like to play more!";
     }
