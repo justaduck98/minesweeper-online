@@ -3,7 +3,6 @@ window.onload = function () {
     runGame(5);
 };
 //counter to keep track if the user has beat the game
-let gameOn = true;
 let flagToggled = false;
 let gridSize = 0;
 
@@ -130,9 +129,6 @@ function checkBombPosition(tile) {
             document.getElementById('bombs').innerHTML = "BOOM! You found a bomb! GAME OVER!!";
             document.getElementsByTagName('h2')[1].innerHTML = "Would You Like To Play Again?";
         }
-        else if (gameOn == false) {
-            document.getElementsByTagName('h2')[1].innerHTML = "You won! Congratulations! Click one of the buttons if you would like to play more!";
-        }
         else {
             revealTile(tile);
         }
@@ -196,14 +192,12 @@ function findAdjacentTiles(x, y) {
 }
 
 function calculateWinCondition() {
-    let numberOfBombs = document.getElementsByClassName("bomb");
-    let tiles = document.getElementsByTagName("span");
-    let win = tiles.length - numberOfBombs.length;
-    let revealed = document.getElementsByClassName("revealed");
-    console.log("win length: " + win);
+    let totalTiles = document.querySelectorAll("span:not(.bomb)");
+    let revealedTiles = document.querySelectorAll('span.revealed:not(.bomb)');
+    let tilesLeft = totalTiles - revealedTiles.length;
     console.log(revealed.length);
-    if (revealed.length == win) {
-        let gameOn = false;
+    if (tilesLeft === 0) {
+        document.getElementsByTagName('h2')[1].innerHTML = "You won! Congratulations! Click one of the buttons if you would like to play more!";
     }
-    return (win - revealed.length);
+    return win - revealed.length;
 }
