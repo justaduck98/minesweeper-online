@@ -10,16 +10,19 @@ let gridSize = 0;
 document.getElementById('option1').addEventListener("click", function () {
     /*Call run game function as well as generate bombs with parameter of number of squares and to generate*/
     gridSize = 5;
+    document.getElementsByTagName('h2')[1].innerHTML = `Welcome to MineSweeper! You are playing on ${gridSize}x${gridSize}!`;
     runGame(5);
 });
 
 document.getElementById('option2').addEventListener("click", function () {
     gridSize = 7;
+    document.getElementsByTagName('h2')[1].innerHTML = `Welcome to MineSweeper! You are playing on ${gridSize}x${gridSize}!`;
     runGame(7);
 });
 
 document.getElementById('option3').addEventListener("click", function () {
     gridSize = 9;
+    document.getElementsByTagName('h2')[1].innerHTML = `Welcome to MineSweeper! You are playing on ${gridSize}x${gridSize}!`;
     runGame(9);
 });
 
