@@ -99,6 +99,10 @@ function clickTile(event) {
     if (flagToggled == true) {
         setFlag(tile);
     }
+    //Checks if game is won or lost and prevents further input until a button is pressed and a new field is generated!
+    if (document.getElementsByTagName('h2')[1].innerHTML == "Would You Like To Play Again?" || document.getElementsByTagName('h2')[1].innerHTML == "You won! Congratulations! Click one of the buttons if you would like to play more!") {
+        return;
+    }
     else {
         //checks if the clicked tile has a flag, which prevents user from revealing the tile
         if (!tile.classList.contains('flag')) {
