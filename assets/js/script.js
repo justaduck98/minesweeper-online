@@ -198,5 +198,5 @@ function calculateWinCondition() {
     if (tilesLeft === 0) {
         document.getElementsByTagName('h2')[1].innerHTML = "You won! Congratulations! Click one of the buttons if you would like to play more!";
     }
-    return win - revealed.length;
+    return totalTiles - revealedTiles.length;
 }
