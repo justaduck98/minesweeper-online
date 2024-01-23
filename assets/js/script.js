@@ -103,6 +103,7 @@ function clickTile(event) {
     }
     else {
         checkBombPosition(tile);
+        calculateWinCondition();
     }
     //adding .id after tile shows the id of the paragraph clicked, instead of outputting "HTMLParagraphElement"
     console.log(`The tile clicked was: ${tile.id}`);
