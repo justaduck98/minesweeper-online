@@ -7,26 +7,26 @@ let flagToggled = false;
 let gridSize = 0;
 
 //event listener to the 3 difficulty buttons, running the same function but with different parameter!
-document.getElementById('option1').addEventListener("click", function () {
+document.getElementById("option1").addEventListener("click", function () {
     /*Call run game function as well as generate bombs with parameter of number of squares and to generate*/
     gridSize = 5;
-    document.getElementsByTagName('h2')[1].innerHTML = `Welcome to MineSweeper! You are playing on ${gridSize}x${gridSize}!`;
+    document.getElementsByTagName("h2")[1].innerHTML = `Welcome to MineSweeper! You are playing on ${gridSize}x${gridSize}!`;
     runGame(5);
 });
 
-document.getElementById('option2').addEventListener("click", function () {
+document.getElementById("option2").addEventListener("click", function () {
     gridSize = 7;
-    document.getElementsByTagName('h2')[1].innerHTML = `Welcome to MineSweeper! You are playing on ${gridSize}x${gridSize}!`;
+    document.getElementsByTagName("h2")[1].innerHTML = `Welcome to MineSweeper! You are playing on ${gridSize}x${gridSize}!`;
     runGame(7);
 });
 
-document.getElementById('option3').addEventListener("click", function () {
+document.getElementById("option3").addEventListener("click", function () {
     gridSize = 9;
-    document.getElementsByTagName('h2')[1].innerHTML = `Welcome to MineSweeper! You are playing on ${gridSize}x${gridSize}!`;
+    document.getElementsByTagName("h2")[1].innerHTML = `Welcome to MineSweeper! You are playing on ${gridSize}x${gridSize}!`;
     runGame(9);
 });
 
-document.getElementById('flag').addEventListener('change', function () {
+document.getElementById("flag").addEventListener("change", function () {
     if (flag.checked) {
         flagToggled = true;
     }
@@ -39,30 +39,30 @@ document.getElementById('flag').addEventListener('change', function () {
  * to be used as coordinates
  */
 function generatePlayingField(gridSize) {
-    let playingField = document.createElement('div');
+    let playingField = document.createElement("div");
     for (let x = 1; x <= gridSize; x++) {
         //Creates a row container for the following 5 elements
-        let tileRow = document.createElement('div');
-        tileRow.classList.add('row');
+        let tileRow = document.createElement("div");
+        tileRow.classList.add("row");
         for (let y = 1; y <= gridSize; y++) {
             // generates id's in a coordinate system to allow checkBombPosition function to work
             let id = `${x},${y}`;
-            let tile = document.createElement('span');
-            tile.setAttribute('id', id);
-            tile.textContent = '';
-            tile.addEventListener('click', clickTile);
-            tile.addEventListener('contextmenu', clickTile);
+            let tile = document.createElement("span");
+            tile.setAttribute("id", id);
+            tile.textContent = "";
+            tile.addEventListener("click", clickTile);
+            tile.addEventListener("contextmenu", clickTile);
             tileRow.appendChild(tile);
         }
         playingField.appendChild(tileRow);
     }
     //removes old playing field if there is one
-    let oldField = document.getElementById('gameArea');
+    let oldField = document.getElementById("gameArea");
     if (oldField.hasChildNodes()) {
         oldField.removeChild(oldField.firstChild);
     }
     //adds playing field to gameArea div
-    document.getElementById('gameArea').appendChild(playingField);
+    document.getElementById("gameArea").appendChild(playingField);
 
 
 }
@@ -70,7 +70,6 @@ function generatePlayingField(gridSize) {
 function generateBombs(gridSize) {
 
     let numberOfBombs = Math.floor(Math.random() * gridSize) + 3;
-    let bombPositions = [];
     for (let i = 0; i < numberOfBombs; i++) {
         //generate random coordinates
         let xCoord = Math.floor(Math.random() * gridSize) + 1;
@@ -103,12 +102,12 @@ function clickTile(event) {
         setFlag(tile);
     }
     //Checks if game is won or lost and prevents further input until a button is pressed and a new field is generated!
-    if (document.getElementsByTagName('h2')[1].innerHTML == "Would You Like To Play Again?" || document.getElementsByTagName('h2')[1].innerHTML == "You won! Congratulations! Click one of the buttons if you would like to play more!") {
+    if (document.getElementsByTagName("h2")[1].innerHTML == "Would You Like To Play Again?" || document.getElementsByTagName("h2")[1].innerHTML == "You won! Congratulations! Click one of the buttons if you would like to play more!") {
         return;
     }
     else {
         //checks if the clicked tile has a flag, which prevents user from revealing the tile
-        if (!tile.classList.contains('flag')) {
+        if (!tile.classList.contains("flag")) {
             checkBombPosition(tile);
             calculateWinCondition();
         }
@@ -116,8 +115,8 @@ function clickTile(event) {
 }
 /**Adds flag placement functionality */
 function setFlag(tile) {
-    if (tile.innerHTML.includes('fa-flag')) {
-        tile.innerHTML = '';
+    if (tile.innerHTML.includes("fa-flag")) {
+        tile.innerHTML = "";
     }
     else {
         tile.innerHTML = `<i class="fa-solid fa-flag"id="flag"></i>`;
@@ -129,12 +128,12 @@ function setFlag(tile) {
 function checkBombPosition(tile) {
     let numberOfBombs = document.getElementById("bombs").textContent[17];
     for (let i = 0; i < numberOfBombs; i++) {
-        if (tile.classList.contains('bomb')) {
-            let bombTiles = document.getElementsByClassName('bomb');
+        if (tile.classList.contains("bomb")) {
+            let bombTiles = document.getElementsByClassName("bomb");
             bombTiles[i].innerHTML = `<i class="fa-solid fa-bomb"></i>`;
             bombTiles[i].style.color = "black";
-            document.getElementById('bombs').innerHTML = "BOOM! You found a bomb! GAME OVER!!";
-            document.getElementsByTagName('h2')[1].innerHTML = "Would You Like To Play Again?";
+            document.getElementById("bombs").innerHTML = "BOOM! You found a bomb! GAME OVER!!";
+            document.getElementsByTagName("h2")[1].innerHTML = "Would You Like To Play Again?";
         }
         else {
             revealTile(tile);
@@ -147,8 +146,8 @@ function checkBombPosition(tile) {
 function revealTile(tile) {
 
     /**Prevents recursive calling when there is no tile with the called id */
-    if (tile && tile.id && !tile.classList.contains('revealed')) {
-        let coords = tile.id.split(',');
+    if (tile && tile.id && !tile.classList.contains("revealed")) {
+        let coords = tile.id.split(",");
         let x = parseInt(coords[0]);
         let y = parseInt(coords[1]);
         let nearbyBombs = countBombs(tile);
@@ -177,7 +176,7 @@ function countBombs(tile) {
     /**Loops through the nested array above of x and y coordinates adjacent to the clicked tile */
     for (let [adjecentX, adjecentY] of adjecentTiles) {
         let adjecentTile = document.getElementById(`${adjecentX},${adjecentY}`);
-        if (adjecentTile && adjecentTile.classList.contains('bomb')) {
+        if (adjecentTile && adjecentTile.classList.contains("bomb")) {
             bombCount += 1;
         }
 
@@ -201,10 +200,10 @@ function findAdjacentTiles(x, y) {
 
 function calculateWinCondition() {
     let totalTiles = document.querySelectorAll("span:not(.bomb)");
-    let revealedTiles = document.querySelectorAll('span.revealed:not(.bomb)');
+    let revealedTiles = document.querySelectorAll("span.revealed:not(.bomb)");
     let tilesLeft = totalTiles - revealedTiles.length;
     if (tilesLeft === 0) {
-        document.getElementsByTagName('h2')[1].innerHTML = "You won! Congratulations! Click one of the buttons if you would like to play more!";
+        document.getElementsByTagName("h2")[1].innerHTML = "You won! Congratulations! Click one of the buttons if you would like to play more!";
     }
     return totalTiles - revealedTiles.length;
 }
