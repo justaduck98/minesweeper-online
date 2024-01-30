@@ -27,11 +27,13 @@ document.getElementById("option3").addEventListener("click", function () {
 });
 
 document.getElementById("flag").addEventListener("change", function () {
-    if (flag.checked) {
+    if (this.checked) {
         flagToggled = true;
+        console.log(flagToggled);
     }
     else {
         flagToggled = false;
+        console.log(flagToggled);
     }
 });
 
@@ -98,13 +100,15 @@ function runGame(difficulty) {
 /**A handler for clicking on a tile on the website */
 function clickTile(event) {
     let tile = event.target;
+
+    //Checks if game is won or lost and prevents further input until a button is pressed and a new field is generated!
+    /*if (document.getElementsByTagName("h2")[1].innerHTML == "Would You Like To Play Again?" || document.getElementsByTagName("h2")[1].innerHTML == "You won! Congratulations! Click one of the buttons if you would like to play more!") {
+        return;
+    }*/
     if (flagToggled == true) {
         setFlag(tile);
     }
-    //Checks if game is won or lost and prevents further input until a button is pressed and a new field is generated!
-    if (document.getElementsByTagName("h2")[1].innerHTML == "Would You Like To Play Again?" || document.getElementsByTagName("h2")[1].innerHTML == "You won! Congratulations! Click one of the buttons if you would like to play more!") {
-        return;
-    }
+
     else {
         //checks if the clicked tile has a flag, which prevents user from revealing the tile
         if (!tile.classList.contains("flag")) {
@@ -119,7 +123,8 @@ function setFlag(tile) {
         tile.innerHTML = "";
     }
     else {
-        tile.innerHTML = `<i class="fa-solid fa-flag"id="flag"></i>`;
+        console.log("no flag on tile");
+        tile.innerHTML = `<i class="fa-solid fa-flag" id="flag"></i>`;
     }
 
 }
@@ -199,9 +204,9 @@ function findAdjacentTiles(x, y) {
 }
 
 function calculateWinCondition() {
-    let totalTiles = document.querySelectorAll("span:not(.bomb)");
-    let revealedTiles = document.querySelectorAll("span.revealed:not(.bomb)");
-    let tilesLeft = totalTiles - revealedTiles.length;
+    let totalTiles = document.querySelectorAll("span:not(.bomb)").length;
+    let revealedTiles = document.querySelectorAll("span.revealed:not(.bomb)").length;
+    let tilesLeft = totalTiles - revealedTiles;
     if (tilesLeft === 0) {
         document.getElementsByTagName("h2")[1].innerHTML = "You won! Congratulations! Click one of the buttons if you would like to play more!";
     }
