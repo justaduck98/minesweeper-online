@@ -29,11 +29,9 @@ document.getElementById("option3").addEventListener("click", function () {
 document.getElementById("flag").addEventListener("change", function () {
     if (this.checked) {
         flagToggled = true;
-        console.log(flagToggled);
     }
     else {
         flagToggled = false;
-        console.log(flagToggled);
     }
 });
 
@@ -105,7 +103,7 @@ function clickTile(event) {
     /*if (document.getElementsByTagName("h2")[1].innerHTML == "Would You Like To Play Again?" || document.getElementsByTagName("h2")[1].innerHTML == "You won! Congratulations! Click one of the buttons if you would like to play more!") {
         return;
     }*/
-    if (flagToggled == true) {
+    if (flagToggled == true || tile.innerHTML !== "" || tile.classList.contains("fa-flag")) {
         setFlag(tile);
     }
 
@@ -122,9 +120,11 @@ function setFlag(tile) {
     if (tile.innerHTML.includes("fa-flag")) {
         tile.innerHTML = "";
     }
+    else if (tile.classList.contains("fa-flag")) {
+        tile.classList.remove("fa", "fa-solid", "fa-flag");
+    }
     else {
-        console.log("no flag on tile");
-        tile.innerHTML = `<i class="fa-solid fa-flag" id="flag"></i>`;
+        tile.innerHTML = `<i class="fa-solid fa-flag"id="flag"></i>`;
     }
 
 }
@@ -210,5 +210,5 @@ function calculateWinCondition() {
     if (tilesLeft === 0) {
         document.getElementsByTagName("h2")[1].innerHTML = "You won! Congratulations! Click one of the buttons if you would like to play more!";
     }
-    return totalTiles - revealedTiles.length;
+    return tilesLeft;
 }
