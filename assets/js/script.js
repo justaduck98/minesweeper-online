@@ -99,22 +99,24 @@ function runGame(difficulty) {
 function clickTile(event) {
     let tile = event.target;
 
-    //Checks if game is won or lost and prevents further input until a button is pressed and a new field is generated!
-    /*if (document.getElementsByTagName("h2")[1].innerHTML == "Would You Like To Play Again?" || document.getElementsByTagName("h2")[1].innerHTML == "You won! Congratulations! Click one of the buttons if you would like to play more!") {
+    // Check if the game is over
+    if (document.getElementsByTagName("h2")[1].innerHTML == "Would You Like To Play Again?" || document.getElementsByTagName("h2")[1].innerHTML == "You won! Congratulations! Click one of the buttons if you would like to play more!") {
         return;
-    }*/
-    if (flagToggled == true || tile.innerHTML !== "" || tile.classList.contains("fa-flag")) {
-        setFlag(tile);
     }
 
-    else {
-        //checks if the clicked tile has a flag, which prevents user from revealing the tile
+    // Check if flag toggling is enabled and the tile doesn't have a flag
+    if (flagToggled && tile.innerHTML === "") {
+        setFlag(tile);
+    } else {
+        // Check if the clicked tile doesn't have a flag
         if (!tile.classList.contains("flag")) {
+            // Reveal the tile
             checkBombPosition(tile);
             calculateWinCondition();
         }
     }
 }
+
 /**Adds flag placement functionality */
 function setFlag(tile) {
     if (tile.innerHTML.includes("fa-flag")) {
