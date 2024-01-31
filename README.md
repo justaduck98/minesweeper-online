@@ -1,5 +1,7 @@
 # MineSweeper, But Online
 
+![MineSweeper Online Mockup Image](assets/readme%20files/responsive-demo.jpg)
+
 Welcome, to MineSweeper, but Online! The classic game of probability that everyone can enjoy!
 
 The purpose of this website is to allow users to play the beloved game, MineSweeper. Users can flag tiles, click on tiles to reveal them and will lose if the tile they clicked on contains a bomb. There are 3 different sizes available to enjoy!
@@ -10,21 +12,25 @@ Visit the deployed website [here](https://justaduck98.github.io/minesweeper-onli
 ## Table of Contents
 
 - [MineSweeper, But Online](#minesweeper-but-online)
-  -[Table of contents](#table-of-contents)
-  -[User Experience (UX)](#user-experience-ux)
-    -[Project Goals](#projects-goals)
-    -[User Stories](#user-stories)
--[Features](#features)
-    -[General](#general)
-    -[Landing Page](#landing-page)
-- [Technologies Used](#technologies-used)
-  - [Languages Used](#languages-used)
-  - [Framworks And Programs Used](#framework-and-programs-used)
-- [Testing](#testing)
-  - [Testing User stories](#testing-user-stories)
-  - [Code Validation](#code-validation)
-  - [Manual Testing](#manual-testing)
- - [Credits](#credits)
+  - [Table of Contents](#table-of-contents)
+  - [User Experience (UX)](#user-experience-ux)
+    - [Project goals](#project-goals)
+    - [User Stories](#user-stories)
+    - [Color Scheme](#color-scheme)
+    - [Typography](#typography)
+  - [Features](#features)
+    - [General](#general)
+    - [Landing Page](#landing-page)
+  - [Technologies Used](#technologies-used)
+    - [Languages Used](#languages-used)
+    - [Frameworks, Libraries and Programs used](#frameworks-libraries-and-programs-used)
+  - [Testing](#testing)
+    - [Testing User Stories](#testing-user-stories)
+    - [Tools Testing](#tools-testing)
+    - [Manual Testing](#manual-testing)
+  - [Deployment](#deployment)
+    - [GitHub Pages](#github-pages)
+  - [Credits](#credits)
     - [Content](#content)
 ***
 
@@ -63,7 +69,7 @@ The fonts used in this website are Times New Roman and Arial. They should give a
 * Subtle coloring that makes it clear to the user what actions they can take on the website and no distracting elements.
 
 * **Header**
-  ![Header image]
+  ![Header image](assets/readme%20files/minesweeper-header.jpg)
 
   - The header is simply the text: "MineSweeper, The Classic Game To Test Your Superior Skills!"
   - The header is responsive and shrinks both in size and adapts well to mobile, tablet and laptop screens.
@@ -74,25 +80,29 @@ The fonts used in this website are Times New Roman and Arial. They should give a
 ### Landing Page
 
 * **1st Header**
+  ![Header text](assets/readme%20files/minesweeper-h1.jpg)
   - The text is used to display how many bombs are present in the loaded game, to allow the user to know how many bombs are on the playing field.
 
 * **The Game**
+  ![Game](assets/readme%20files/minesweeper-game.jpg)
   - The game is loaded in a 5x5 by default when the page loads, to allow the user to quickly start playing if they are limited on time.
  
 * **Game Text**
+  ![Game info text](assets/readme%20files/minesweeper-game-text.jpg)
   - This text allows the user to know what difficulty they are currently playing, and is responsive to display the correct text as difficulty changes.
   - This text will also be changed to "Would You Like To Play Again?" when a game is lost.
  
 * **Difficulty Buttons**
+  ![Buttons for Difficulty](assets/readme%20files/minesweeper-difficulty-buttons.jpg)
   - These buttons will generate a new playing field, 5x5, 7x7, 9x9 and show it to the user.
   - These buttons also work as play again options as there is no play again button currently.
  
 ## Technologies Used
 
 ### Languages Used 
-  *[HTML5](https://en.wikipedia.org/wiki/HTML5)
-  *[CSS3](https://en.wikipedia.org/wiki/CSS)
-  *[ES6](https://en.wikipedia.org/wiki/ECMAScript)
+  * [HTML5](https://en.wikipedia.org/wiki/HTML5)
+  * [CSS3](https://en.wikipedia.org/wiki/CSS)
+  * [ES6](https://en.wikipedia.org/wiki/ECMAScript)
 
 ### Frameworks, Libraries and Programs used
 
@@ -106,14 +116,17 @@ The fonts used in this website are Times New Roman and Arial. They should give a
     - Chrome DevTools was used during development process for processing code and testing responsiveness.
  
 * [W3C Markup Validator](https://validator.w3.org/)
-    - W3C Markup Validator was used to validate the HTML code.
+    - W3C Markup Validator was used to validate the HTML code and no errors found.
 
 * [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
-    - W3C CSS Validator was used to validate the CSS code.
+    - W3C CSS Validator was used to validate the CSS code and no errors found.
 
 * [JS Validator](https://www.jslint.com/)
     - Jslint was used to validate the js code.
-    - Passed validation with for-loops allowed.
+    - Passed validation with for-loop allowed but failed for line character limit.
+
+- [Am I Responsive?](http://ami.responsivedesign.is/#) 
+  - Was used to check responsiveness of the site pages across different devices.
 
 
 ## Testing
