@@ -7,7 +7,7 @@ The target audience for this website is people who want to enjoy some brain gymn
 
 Visit the deployed website [here](https://justaduck98.github.io/minesweeper-online/)
 
-##Table of Contents
+## Table of Contents
 
 - [MineSweeper, But Online](#minesweeper-but-online)
   -[Table of contents](#table-of-contents)
@@ -26,12 +26,9 @@ Visit the deployed website [here](https://justaduck98.github.io/minesweeper-onli
   - [Manual Testing](#manual-testing)
  - [Credits](#credits)
     - [Content](#content)
-    - [Media](#media)
-    - [Code](#code)
-  - [Acknowledgements](#acknowledgements)
 ***
 
-##Usere Experience (UX)
+## User Experience (UX)
 
 ### Project goals
 
@@ -93,9 +90,9 @@ The fonts used in this website are Times New Roman and Arial. They should give a
 ## Technologies Used
 
 ### Languages Used 
-  *[HTML5]
-  *[CSS3]
-  *[JS]
+  *[HTML5](https://en.wikipedia.org/wiki/HTML5)
+  *[CSS3](https://en.wikipedia.org/wiki/CSS)
+  *[ES6](https://en.wikipedia.org/wiki/ECMAScript)
 
 ### Frameworks, Libraries and Programs used
 
@@ -114,4 +111,97 @@ The fonts used in this website are Times New Roman and Arial. They should give a
 * [W3C CSS Validator](https://jigsaw.w3.org/css-validator/)
     - W3C CSS Validator was used to validate the CSS code.
 
-* JS validator
+* [JS Validator](https://www.jslint.com/)
+    - Jslint was used to validate the js code.
+    - Passed validation with for-loops allowed.
+
+
+## Testing
+
+### Testing User Stories
+
+* As a site visitor, the purpose of the website should be clear, and figuring out how to play the game should take no less than 5 minutes. 
+    - The websites purpose is clear. An online version of Minesweeper.
+    - The number of bombs text, and clicking around allows the users to find out how the game works without a text explanation.
+
+* As an avid MineSweep Player, I would like to change up the difficulties for varying how hard the game should be. 
+  - The game comes in 3 different difficulties. 5x5, 7x7, and 9x9!
+
+* As a travelling worker, I would like to enjoy my favorite game while on the go on my phone.
+    - The game is responsive and uses mobile first design, allowing visitors to play regardless of device!
+
+### Tools Testing
+
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
+
+  - Chrome DevTools was used during the development process to test, explore and modify HTML elements and CSS styles used in the project.
+
+- Responsiveness
+
+  - [Am I Responsive?](http://ami.responsivedesign.is/#) was used to check responsiveness of the site pages across different devices.
+
+  - Chrome DevTools was used to test responsiveness in different screen sizes during the development process.
+
+### Manual Testing
+
+- Browser Compatibility
+
+  - The website has been tested on the following browsers:
+
+    - **Goolgle Chrome**
+
+        No appearance, responsiveness nor functionality issues.
+
+    - **Mozilla Firefox**
+
+        No responsiveness nor functionality issues.
+
+    - **Microsoft Edge**
+
+        No appearance, responsiveness nor functionality issues.
+
+- Elements Testing
+    - Flag checkbox
+      - Clicking on the checkbox allows the user to place flags. There is a known bug that allows the user to place 2 flags on the same tile. This is being looked into and this will be patched.
+  
+    - Tiles
+      - Clicking on tiles reveals tiles, a number of how many bombs were around and if the number was 0, more tiles are revealed to save time and effort.
+
+    - Difficulty Buttons
+      - Pressing each of the buttons generate a playing field of specified size and with a random amounts of bombs each time. The bombs are also placed randomly on the playing field.
+
+- Device compatibility
+
+  - The website has been tested on these devices:
+
+    - **Motorola G30**
+
+        No appearance, responsiveness nor functionality issues.
+
+    - **Windows 10 desktop**
+
+        No appearance, responsiveness nor functionality issues.
+
+## Deployment
+
+- This website was developed using [CodeAnywhere](app.codeanywhere.com), which was then committed and pushed to GitHub using the provided terminal.
+
+### GitHub Pages
+
+- Here are the steps to deploy this website to GitHub Pages from its GitHub repository:
+
+    1. Log in to GitHub and locate the [GitHub Repository](https://github.com/).
+
+    2. At the top of the Repository, locate the Settings button on the menu.
+
+    3. Scroll down the Settings page until you locate the Pages section.
+
+    4. Under Source, click the dropdown called None and select Master Branch.
+
+    5. The page will refresh automatically and generate a link to your website.
+
+## Credits
+
+### Content
+
+- All content was written by the developer.
